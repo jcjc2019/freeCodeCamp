@@ -1,9 +1,12 @@
+// const { parse } = require('path');
 const path = require('path');
+// const { parseMD } = require('../tools/challenge-parser/parser');
 
 const {
   generateChallengeCreator,
   hasEnglishSource,
-  createCommentMap
+  createCommentMap,
+  getTranslatableComments
 } = require('./getChallenges');
 
 const EXISTING_CHALLENGE_PATH = 'challenge.md';
@@ -34,7 +37,7 @@ It should be in
     });
   });
   describe('hasEnglishSource', () => {
-    it('returns a boolean', async () => {
+    it('return a boolean', async () => {
       const sourceExists = await hasEnglishSource(
         basePath,
         EXISTING_CHALLENGE_PATH
@@ -54,6 +57,36 @@ It should be in
         MISSING_CHALLENGE_PATH
       );
       expect(sourceExists).toBe(false);
+    });
+  });
+
+  // //below are the new tests for parseTranslation, but not working?
+  // describe('parseTranslation', () => {
+  //     it('should throw error if challenge type equals to 11', async () => {
+  //         const translatedChal = await parse(EXISTING_CHALLENGE_PATH);
+  //         const { challengeType } = translatedChal;
+  //         if (challengeType == 11) {
+  //             throw new TypeError('Challenge Type should not be video challenges!')
+  //         }
+  //     });
+  //     it('should throw error if challenge type equals to 3', async () => {
+  //         const translatedChal = await parse(EXISTING_CHALLENGE_PATH);
+  //         const { challengeType } = translatedChal;
+  //         if (challengeType == 3) {
+  //             throw new TypeError('Challenge Type should not be video challenges!')
+  //         }
+  //     });
+  // });
+
+  //Below is new test added for getTranslatableComments
+  describe('getTranslatableComments', () => {
+    const dictionaryDir = path.resolve(
+      __dirname,
+      '__fixtures__',
+      'dictionaries'
+    );
+    it('returns an array of the values of the object', () => {
+      expect(typeof getTranslatableComments(dictionaryDir)).toBe('object');
     });
   });
 
