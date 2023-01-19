@@ -1,6 +1,6 @@
 ---
 id: 587d7b8f367417b2b2512b62
-title: Карта реалізації на прототипі
+title: Імплементація map на прототипі
 challengeType: 1
 forumTopicId: 301230
 dashedName: implement-map-on-a-prototype
@@ -16,19 +16,35 @@ dashedName: implement-map-on-a-prototype
 
 # --instructions--
 
-Напишіть ваш власний `Array.prototype.myMap()`, що повинен поводити себе точно так як `Array.prototype.map()`. Не варто використовувати вбудований метод `map`. Екземпляр `Array` може бути доступним за допомогою методу `myMap` з використанням `this`.
+Напишіть ваш власний `Array.prototype.myMap()`, що повинен поводити себе точно так як `Array.prototype.map()`. Ви не повинні використовувати вбудований метод `map`. Екземпляр `Array` може бути доступним за допомогою методу `myMap` з використанням `this`.
 
 # --hints--
 
-`[23, 65, 98, 5, 13].myMap(item => item * 2)` should equal `[46, 130, 196, 10, 26]`.
+`[23, 65, 98, 5, 13].myMap(item => item * 2)` повинна дорівнювати `[46, 130, 196, 10, 26]`.
 
 ```js
-const _test_s = [46, 130, 196, 10, 13];
+const _test_s = [23, 65, 98, 5, 13];
 const _callback = item => item * 2;
 assert(JSON.stringify(_test_s.map(_callback)) === JSON.stringify(_test_s.myMap(_callback)));
 ```
 
-Не використовуйте метод `map` у вашому коді.
+`["naomi", "quincy", "camperbot"].myMap(element => element.toUpperCase())` повинна повертати `["NAOMI", "QUINCY", "CAMPERBOT"]`.
+
+```js
+const _test_s = ["naomi", "quincy", "camperbot"];
+const _callback = element => element.toUpperCase();
+assert(JSON.stringify(_test_s.map(_callback)) === JSON.stringify(_test_s.myMap(_callback)));
+```
+
+`[1, 1, 2, 5, 2].myMap((element, index, array) => array[index + 1] || array[0])` повинна повертати `[1, 2, 5, 2, 1]`.
+
+```js
+const _test_s = [1, 1, 2, 5, 2];
+const _callback = (element, index, array) => array[index + 1] || array[0];
+assert(JSON.stringify(_test_s.map(_callback)) === JSON.stringify(_test_s.myMap(_callback)));
+```
+
+Ваш код не повинен використовувати метод `map`.
 
 ```js
 assert(!code.match(/\.?[\s\S]*?map/g));
@@ -53,8 +69,8 @@ Array.prototype.myMap = function(callback) {
 ```js
 Array.prototype.myMap = function(callback) {
   const newArray = [];
-  for (const elem of this) {
-    newArray.push(callback(elem));
+  for (let i = 0; i < this.length; i++) {
+    newArray.push(callback(this[i], i, this));
   }
   return newArray;
 };

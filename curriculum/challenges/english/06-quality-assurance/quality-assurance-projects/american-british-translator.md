@@ -20,7 +20,7 @@ If you use Replit, follow these steps to set up the project:
 -   Next, you will see a `.replit` window. 
 -   Select `Use run command` and click the `Done` button. 
 
-When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the `Solution Link` field. Optionally, also submit a link to your project's source code in the `GitHub Link` field.
+When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the Solution Link field. Optionally, also submit a link to your project's source code in the GitHub Link field.
 
 # --instructions--
 
@@ -69,7 +69,7 @@ Write the following tests in `tests/2_functional-tests.js`:
 
 # --hints--
 
-I can provide my own project, not the example URL.
+You should provide your own project, not the example URL.
 
 ```js
 (getUserInput) => {
